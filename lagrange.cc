@@ -5,10 +5,14 @@
 
 int main()
 {
-  std::array<double,3> pts{0., 0.5, 1.};
-  PolynomialsLagrange<2,double> pols(pts);
+  std::array<double,5> pts{0., 0.25, 0.5, 0.75, 1.};
+  PolynomialsLagrange<4,double> pols(pts);
 
-  std::cout << pols.derivatives<0>(.2)[0][0] << " "
-	    << pols.derivatives<0>(.2)[0][1] << " "
-	    << pols.derivatives<0>(.3)[0][1] << std::endl;
+  for (unsigned int i=0; i<=20; ++i)
+    {
+      const double x = (double)i/20.;
+      for (unsigned int d=0; d<pts.size(); ++d)
+        std::cout << pols.derivatives<0>(x)[0][d] << " ";
+      std::cout << std::endl;
+    }
 }
