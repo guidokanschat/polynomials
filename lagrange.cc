@@ -2,11 +2,22 @@
 #include <iostream>
 
 #include "lagrange.h"
+#include "roots.h"
+#include "jacobi.h"
 
 int main()
 {
-  std::array<double,5> pts{0., 0.25, 0.5, 0.75, 1.};
-  PolynomialsLagrange<4,double> pols(pts);
+  auto r = roots(PolynomialsJacobiInt<5,double>(1,1));
+  std::array<double,7> pts;
+  pts[0] = 0;
+  for (unsigned int i=0; i<r.size(); ++i)
+    pts[i+1] = 0.5+0.5*r[i];
+  pts[6] = 1;
+  std::cout << "roots: ";
+  for (auto r : pts)
+    std::cout << r << " ";
+  std::cout << std::endl;
+  PolynomialsLagrange<6,double> pols(pts);
 
   for (unsigned int i=0; i<=20; ++i)
     {
