@@ -120,31 +120,38 @@ std::enable_if_t<Degree == 0, Vtype> legendre_integral(Vtype start, Vtype end) {
 
 template <int Degree, typename Vtype = double>
 std::enable_if_t<Degree == 1, Vtype> legendre_integral(Vtype start, Vtype end) {
-  auto f = [](Vtype x) { return 0.5 * x * x;};
+  auto f = [](Vtype x) { return 0.5 * x * x; };
   return f(end) - f(start);
 }
 
 template <int Degree, typename Vtype = double>
 std::enable_if_t<Degree == 2, Vtype> legendre_integral(Vtype start, Vtype end) {
-  auto f = [](Vtype x) { return 0.5 * (std::pow(x, 3) - x);};
+  auto f = [](Vtype x) { return 0.5 * (std::pow(x, 3) - x); };
   return f(end) - f(start);
 }
 
 template <int Degree, typename Vtype = double>
 std::enable_if_t<Degree == 3, Vtype> legendre_integral(Vtype start, Vtype end) {
-  auto f = [](Vtype x) { return 0.625 * std::pow(x, 4) - 0.75 * std::pow(x, 2);};
+  auto f = [](Vtype x) {
+    return 0.625 * std::pow(x, 4) - 0.75 * std::pow(x, 2);
+  };
   return f(end) - f(start);
 }
 
 template <int Degree, typename Vtype = double>
 std::enable_if_t<Degree == 4, Vtype> legendre_integral(Vtype start, Vtype end) {
-  auto f = [](Vtype x) { return  (1.0 / 8.0) * (7 * std::pow(x, 5) - 10.0 * std::pow(x, 3) + 3 * x);};
+  auto f = [](Vtype x) {
+    return (1.0 / 8.0) * (7 * std::pow(x, 5) - 10.0 * std::pow(x, 3) + 3 * x);
+  };
   return f(end) - f(start);
 }
 
 template <int Degree, typename Vtype = double>
 std::enable_if_t<Degree == 5, Vtype> legendre_integral(Vtype start, Vtype end) {
-  auto f = [](Vtype x) { return 1.3125 * std::pow(x, 6) - 2.1875 * std::pow(x, 4) + 0.9375 * std::pow(x, 2);};
+  auto f = [](Vtype x) {
+    return 1.3125 * std::pow(x, 6) - 2.1875 * std::pow(x, 4) +
+           0.9375 * std::pow(x, 2);
+  };
   return f(end) - f(start);
 }
 

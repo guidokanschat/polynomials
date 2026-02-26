@@ -18,7 +18,8 @@ class Fraction {
   }
 
   explicit operator long double() const {
-    return (static_cast<long double>(Numerator) / static_cast<long double>(Denominator));
+    return (static_cast<long double>(Numerator) /
+            static_cast<long double>(Denominator));
   }
 
   explicit operator float() const {

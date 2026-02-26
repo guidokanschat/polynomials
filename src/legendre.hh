@@ -14,8 +14,8 @@
 
 template <typename Vtype>
 class Legendre {
-  typedef Fraction<int> Frac;
  private:
+  typedef Fraction<int> Frac;
   std::vector<Vtype> coefficients_;
   int max_degree_;
 
@@ -78,12 +78,10 @@ class Legendre {
   }
 
   static Frac smaller_k(int n, int k) {
-    return Frac((- (n - k + 2)*(n + k - 1)), (k * (k - 1)));
+    return Frac((-(n - k + 2) * (n + k - 1)), (k * (k - 1)));
   }
 
-  static Frac smaller_n(int n, int k) {
-    return Frac(- (n + k - 1), (n - k));
-  }
+  static Frac smaller_n(int n, int k) { return Frac(-(n + k - 1), (n - k)); }
 
   // na_{n, i} = (2n - 1) a_{n - 1, i - 1(x) - (n - 1)_{a_{n-2, 2}}
   std::vector<Vtype> compute_cartesian() {
@@ -94,24 +92,24 @@ class Legendre {
     if (max_degree_ > 0) {
       res.at(1) += coefficients_.at(1);
 
-      for(int n = 2; n <= max_degree_; n += 2) {
+      for (int n = 2; n <= max_degree_; n += 2) {
         current_base_factor *= Fraction(-n + 1, n);
         Fraction a = current_base_factor;
         Vtype c = coefficients_.at(n);
         res.at(0) += c * static_cast<Vtype>(a);
-        for(int k = 2; k <= n; k += 2) {
+        for (int k = 2; k <= n; k += 2) {
           a *= smaller_k(n, k);
           res.at(k) += static_cast<Vtype>(a) * c;
         }
       }
 
       current_base_factor = Fraction(1, 1);
-      for(int n = 3; n <= max_degree_; n += 2) {
+      for (int n = 3; n <= max_degree_; n += 2) {
         current_base_factor *= Fraction(-n, n - 1);
         Fraction a = current_base_factor;
         Vtype c = coefficients_.at(n);
         res.at(1) += c * static_cast<Vtype>(a);
-        for(int k = 3; k <= n; k += 2) {
+        for (int k = 3; k <= n; k += 2) {
           a *= smaller_k(n, k);
           res.at(k) += static_cast<Vtype>(a) * c;
         }
